@@ -1,3 +1,4 @@
-Кирилл Скуратов: Написал main.py, clouds.py, создание репозитория на github
-Мацков Михаил: bullets.py, lives.py, constants.py, requirements
+Кирилл Скуратов: Написал main.py, clouds.py, создание репозитория на github, нашёл картинки (папка img)
+Мацков Михаил: bullets.py, lives.py, constants.py, requirements, нашёл звуки (папка sound)
 Шмелев Егор: bonuses.py, painting.py, Презентация, документация, подготовка выступления
+Поставьте пж нам равное количество баллов, чтобы никто не обиделся (мы очень старались)
