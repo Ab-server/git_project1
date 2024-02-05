@@ -70,4 +70,3 @@ def check_bonuses(lives, vulnerable, polygon, bonus_life):
             invulnerability_t = invulnerability_t_extra
 
     return lives, vulnerable
-

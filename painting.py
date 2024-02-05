@@ -37,7 +37,7 @@ def draw_go(win, font_small, font_normal, font_huge, game_time, best_time, level
     win.blit(go_txt, go_rec)
 
     yres_txt = font_small.render('Ваш результат: ' + str(round(game_time, 1)) + 'С;  ' + 'Ваш уровень: ' + str(level),
-                                  True, (0, 137, 204))
+                                 True, (0, 137, 204))
     yres_rec = yres_txt.get_rect()
     yres_rec.center = (win_w / 2, win_h / 3 + 100 * scaling)
     bestres_txt = font_normal.render('Лучший результат: ' + str(round(best_time, 1)) + 'С', True, (0, 137, 204))

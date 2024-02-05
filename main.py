@@ -60,7 +60,7 @@ pl_spdy0 = 0
 pl_spdx = pl_spdx0  # Текущие скорости самолётика по осям
 pl_spdy = pl_spdy0
 
-level = 1 # Уровень игры
+level = 1  # Уровень игры
 
 
 pl_lives0 = 3
@@ -99,6 +99,7 @@ def fall(dt, y, spdy, ay):
     y += spdy * dt + ay * dt ** 2 / 2
     spdy += ay * dt
     return y, spdy
+
 
 spawn_timer = pygame.time.get_ticks()
 
@@ -273,4 +274,3 @@ while not crashed:
 
 best_result.close()
 pygame.quit()  # Завершение программы
-quit()

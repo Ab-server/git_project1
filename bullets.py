@@ -1,6 +1,5 @@
 from constants import *
 import random
-import time
 
 bullet_array = []
 speed_counter = 0  # коэф. изменения скорости пули
@@ -33,14 +32,6 @@ def bullet_generator(win, x, y, bullet_picture):
         else:
             shot.x = shot.x + shot.v_x
             shot.y = shot.y + shot.v_y
-
-
-    # if speed_counter < speed_counter_lim:
-    #     bullet_speed = bullet_speed_init + bullet_speed_add * (speed_counter // 500)
-    #     if speed_counter == speed_counter_lim - 1:
-    #         bullet_speed = bullet_speed_init + bullet_speed_add * 11
-
-
     if len(bullet_array) == 0:
         new_born_x = random.randrange(0, win_w, 5)
         new_born_y = win_h + bull_w / 2
@@ -68,6 +59,7 @@ def bullet_generator(win, x, y, bullet_picture):
     # while True:
     #     bullet_speed *= 1.4
     #     time.sleep(5)
+
 
 def distance(x_p, y_p, x_l, y_l, c_l):
     """Расстояние между точкой и линией """
@@ -104,10 +96,8 @@ def one_crossing(first_point, second_point, x_p, y_p, r):
     if ((x_p - second_point[0]) ** 2 + (y_p - second_point[1]) ** 2) ** 0.5 <= r:
         return True
     p = projection(x_p, y_p, straight(first_point, second_point))
-    if p[0] <= max(first_point[0], second_point[0]) and p[0] >= min(first_point[0],
-                                                                    second_point[0]) and p[
-        1] <= max(first_point[1], second_point[1]) and \
-            p[1] >= min(first_point[1], second_point[1]) \
+    if (min(first_point[0], second_point[0]) <= p[0] <= max(first_point[0], second_point[0])) and \
+            (min(first_point[1], second_point[1]) <= p[1] <= max(first_point[1], second_point[1])) \
             and distance(x_p, y_p, st[0], st[1], st[2]) <= r:
         return True
     return False
