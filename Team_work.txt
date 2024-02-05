@@ -1,0 +1,3 @@
+Кирилл Скуратов: Написал main.py, clouds.py, создание репозитория на github
+Мацков Михаил: bullets.py, lives.py, constants.py, requirements
+Шмелев Егор: bonuses.py, painting.py, Презентация, документация, подготовка выступления
