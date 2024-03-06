@@ -1,12 +1,28 @@
 from constants import *
 import random
 
+
 bullet_array = []
 speed_counter = 0  # коэф. изменения скорости пули
 bullet_speed = bullet_speed_init
 
 
 class bullet():
+
+    """Класс, представляющий пули в игре.
+
+       Атрибуты:
+           x (int): Координата x пули на экране.
+           y (int): Координата y пули на экране.
+           v_x (int): Скорость перемещения пули по оси x.
+           v_y (int): Скорость перемещения пули по оси y.
+           rad (float): Радиус пули.
+           picture (pygame.Surface): Изображение пули.
+
+       Методы:
+           draw(win): Отображает пулю на экране по указанным координатам.
+       """
+
     def __init__(self, x, y, v_x, v_y, rad, picture):
         self.x = x
         self.y = y
@@ -15,12 +31,28 @@ class bullet():
         self.rad = rad
         self.picture = picture
 
+
     def draw(self, win):
+
+        """Отображает пулю на экране по указанным координатам.
+            Аргументы:
+                win (pygame.Surface): Экран, на котором будет отображена пуля.
+        """
+
         win.blit(self.picture, (self.x - bull_w / 2, self.y - bull_w / 2))
 
 
 def bullet_generator(win, x, y, bullet_picture):
-    """Изменение поизции пуль и генератор новых"""
+
+    """Генерация пуль и обновление их положения на экране.
+
+    Аргументы:
+        win (pygame.Surface): Экран, на котором будут отображаться пули.
+        x (int): Координата x точки, куда направлены пули.
+        y (int): Координата y точки, куда направлены пули.
+        bullet_picture (pygame.Surface): Изображение пули.
+    """
+
     global bullet_array
     global speed_counter
     global bullet_speed
@@ -32,6 +64,7 @@ def bullet_generator(win, x, y, bullet_picture):
         else:
             shot.x = shot.x + shot.v_x
             shot.y = shot.y + shot.v_y
+
     if len(bullet_array) == 0:
         new_born_x = random.randrange(0, win_w, 5)
         new_born_y = win_h + bull_w / 2
@@ -56,17 +89,14 @@ def bullet_generator(win, x, y, bullet_picture):
     for shot in bullet_array:
         shot.draw(win)
 
-    # while True:
-    #     bullet_speed *= 1.4
-    #     time.sleep(5)
-
 
 def distance(x_p, y_p, x_l, y_l, c_l):
-    """Расстояние между точкой и линией """
+    """Вычисляет расстояние от точки до прямой."""
     return abs(x_l * x_p + y_l * y_p + c_l) / (x_l ** 2 + y_l ** 2) ** 0.5
 
 
 def straight(first_point, second_point):
+    """Находит уравнение прямой, проходящей через две заданные точки"""
     if first_point[0] == second_point[0]:
         return [1, 0, -first_point[0]]
     elif first_point[1] == second_point[1]:
@@ -78,7 +108,7 @@ def straight(first_point, second_point):
 
 
 def projection(x_p, y_p, alfa):
-    """Координаты точки"""
+    """Находит проекцию точки на прямую."""
     if alfa[0] == 0:
         return [x_p, - alfa[2] / alfa[1]]
     elif alfa[1] == 0:
@@ -90,20 +120,24 @@ def projection(x_p, y_p, alfa):
 
 
 def one_crossing(first_point, second_point, x_p, y_p, r):
+    """Проверяет, пересекает ли прямая окружность"""
     st = straight(first_point, second_point)
     if ((x_p - first_point[0]) ** 2 + (y_p - first_point[1]) ** 2) ** 0.5 <= r:
         return True
     if ((x_p - second_point[0]) ** 2 + (y_p - second_point[1]) ** 2) ** 0.5 <= r:
         return True
     p = projection(x_p, y_p, straight(first_point, second_point))
-    if (min(first_point[0], second_point[0]) <= p[0] <= max(first_point[0], second_point[0])) and \
-            (min(first_point[1], second_point[1]) <= p[1] <= max(first_point[1], second_point[1])) \
+    if p[0] <= max(first_point[0], second_point[0]) and p[0] >= min(first_point[0],
+                                                                    second_point[0]) and p[
+        1] <= max(first_point[1], second_point[1]) and \
+            p[1] >= min(first_point[1], second_point[1]) \
             and distance(x_p, y_p, st[0], st[1], st[2]) <= r:
         return True
     return False
 
 
 def crossing(polygon_vertexes, x_p, y_p, r):
+    """Проверяет, пересекает ли окружность полигон"""
     for i in range(len(polygon_vertexes)):
         if one_crossing(polygon_vertexes[i - 1], polygon_vertexes[i], x_p, y_p, r):
             return True

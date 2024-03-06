@@ -4,6 +4,7 @@ import bonuses as bon
 
 
 def check_lives(y, pl_spdy, lives, vulnerable, polygon, hit):
+
     """Процедура, которая проверяет события, влекущие за собой потерю жизней
             Аргументы:
             y - координата самолётика по оси Y
@@ -12,6 +13,7 @@ def check_lives(y, pl_spdy, lives, vulnerable, polygon, hit):
             vulnerable - флаг, показывающий является ли цель уязвимой в данный момент
             polygon - многоугольник, задающий самолётик
             hit - звук при попадании пули"""
+
     global t_vul, invulnerability_t
     if y > (win_h - brd) and vulnerable:
         pl_spdy = -rescue_spd
@@ -70,3 +72,4 @@ def check_bonuses(lives, vulnerable, polygon, bonus_life):
             invulnerability_t = invulnerability_t_extra
 
     return lives, vulnerable
+
